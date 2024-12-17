@@ -1,0 +1,16 @@
+﻿<div class="chat-container">
+  <h2>Czat</h2>
+  <div class="messages">
+    <div *ngFor="let msg of messages" class="message-bubble">
+      <strong>{{msg.user}}:</strong> {{msg.text}}
+    </div>
+  </div>
+  <div class="inputs">
+    <input [(ngModel)]="user" placeholder="Twoje imię" class="input-field" />
+    <input [(ngModel)]="message" placeholder="Twoja wiadomość" class="input-field" />
+    <button (click)="sendMessage()" class="send-button">Wyślij</button>
+  </div>
+  <div class="back-container">
+    <a routerLink="/" class="back-link">← Powrót do strony głównej</a>
+  </div>
+</div>

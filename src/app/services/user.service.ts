@@ -25,7 +25,7 @@ export interface UserResponse {
 })
 export class UserService {
 
-  private apiUrl = 'https://caretrack-production.up.railway.app/patient';
+  private apiUrl = 'https://localhost:7081/patient';
 
   constructor(private http: HttpClient) { }
 
@@ -37,9 +37,9 @@ export class UserService {
   // Dodawanie nowego użytkownika (pacjenta)
   addUser(user: User): Observable<User> {
     const payload = {
-      patientResult: user
+      patient: user
     };
-  
+
     return this.http.post<User>(this.apiUrl, payload);
   }
 

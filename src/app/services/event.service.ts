@@ -21,7 +21,7 @@ export interface ApiResponse<T> {
   providedIn: 'root',
 })
 export class EventService {
-  private apiUrl = 'https://caretrack-production.up.railway.app/event';
+  private apiUrl = 'https://localhost:7081/event';
 
   constructor(private http: HttpClient) {}
 

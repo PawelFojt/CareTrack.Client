@@ -28,7 +28,7 @@ export interface PrescriptionResponse {
 })
 export class PrescriptionService {
 
-  private apiUrl = 'https://caretrack-production.up.railway.app/prescription';
+  private apiUrl = 'https://localhost:7081/prescription';
 
   constructor(private http: HttpClient) { }
 

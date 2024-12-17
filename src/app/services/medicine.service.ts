@@ -21,7 +21,7 @@ export interface ApiResponse<T> {
   providedIn: 'root'
 })
 export class MedicineService {
-  private apiUrl = 'https://caretrack-production.up.railway.app/medicine';
+  private apiUrl = 'https://localhost:7081/medicine';
 
   constructor(private http: HttpClient) { }
 
@@ -34,7 +34,7 @@ export class MedicineService {
 
   // Dodawanie nowego leku
   addMedicine(medicine: Medicine): Observable<ApiResponse<Medicine>> {
-    const payload = { Medicine: medicine }; 
+    const payload = { Medicine: medicine };
     return this.http.post<ApiResponse<Medicine>>(this.apiUrl, payload);
   }
 }
