@@ -1,12 +1,16 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http'; // Poprawiony import HttpClient
+import { provideHttpClient } from '@angular/common/http';
+import { importProvidersFrom } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
-    provideHttpClient()  // Zapewnienie HttpClient na poziomie aplikacji
+    provideHttpClient(),
+    importProvidersFrom(FormsModule, CommonModule)
   ]
 }).catch(err => console.error(err));

@@ -9,6 +9,9 @@ import { AddMedicineComponent } from './add-medicine/add-medicine.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import {ChatComponent} from "./chat/chat.component";
+import {LoginComponent} from "./login/login.component";
+import {RegisterComponent} from "./register/register.component";
+import {RoleGuard} from "./auth.guard";
 
 
 export const routes: Routes = [
@@ -16,28 +19,34 @@ export const routes: Routes = [
         path: '', component: MainPageComponent
     },
     {
-        path: 'presciption', component: PrescriptionsComponent
+        path: 'presciption', component: PrescriptionsComponent, canActivate: [RoleGuard], data: {roles: ['Doctor']}
     },
     {
-        path: 'users', component: UserComponent
+        path: 'users', component: UserComponent, canActivate: [RoleGuard], data: {roles: ['Doctor']}
     },
     {
-        path: 'medicines', component: MedicinesComponent
+        path: 'medicines', component: MedicinesComponent, canActivate: [RoleGuard], data: {roles: ['Doctor']}
     },
     {
-        path: 'add-medicine', component: AddMedicineComponent
+        path: 'add-medicine', component: AddMedicineComponent, canActivate: [RoleGuard], data: {roles: ['Doctor']}
     },
     {
         path: 'add-user', component: AddUserComponent
     },
     {
-        path: 'calendar', component: CalendarComponent
+        path: 'calendar', component: CalendarComponent, canActivate: [RoleGuard], data: {roles: ['Doctor', 'Patient']}
     },
     {
         path: 'user-details/:id', component: UserDetailsComponent
     },
     {
         path: 'chat', component: ChatComponent
+    },
+    {
+        path: 'login', component: LoginComponent
+    },
+    {
+        path: 'register', component: RegisterComponent
     }
 
 ];

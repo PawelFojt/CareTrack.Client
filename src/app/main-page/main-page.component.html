@@ -1,49 +1,61 @@
 <header>
-    <div class="logo">Klinika Wesołe słoneczko</div>
-    <div class="user-profile">
-        <span> Dr. Kowalski</span>
-        <img src="https://cdn.galleries.smcloud.net/t/galleries/gf-ZhMt-TvcR-jmrg_lekarz-medycyny-podrozy-przed-wyjazdem-w-tropiki-udaj-sie-do-lekarza-1920x1080-nocrop.jpg" alt="Profil">
+  <div class="logo">Klinika Wesołe słoneczko</div>
+  <div class="user-profile">
+    <span *ngIf="username">Witaj, <span *ngIf="role === 'Doctor'">Dr.</span> {{ username }}!</span>
+    <span *ngIf="!username">Witaj!</span>
+    <img *ngIf="role === 'Doctor'" src="https://cdn.galleries.smcloud.net/t/galleries/gf-ZhMt-TvcR-jmrg_lekarz-medycyny-podrozy-przed-wyjazdem-w-tropiki-udaj-sie-do-lekarza-1920x1080-nocrop.jpg" alt="Profil">
+
+    <div class="button-container" *ngIf="!username">
+      <a routerLink="/login" class="top-link">Logowanie</a>
     </div>
+    <div class="button-container" *ngIf="!username">
+      <a routerLink="/register" class="top-link">Rejestracja</a>
+    </div>
+
+    <div class="button-container" *ngIf="username">
+      <button (click)="logout()" class="logout-button">Wyloguj</button>
+    </div>
+  </div>
 </header>
-    <main>
-        <div class="welcome">
-        Witaj, Dr. Kowalski! Co chciałbyś dziś zrobić?
-        </div>
+<main>
+  <div class="welcome">
+    <span *ngIf="username">
+        Witaj, <span *ngIf="role === 'Doctor'">Dr.</span> {{ username }}!
+    </span>
+    <span *ngIf="!username">Witaj! </span>Co chciałbyś dziś zrobić?
+  </div>
 
-    <div class="tiles">
-      <!-- Kafelek 1 -->
-      <a routerLink="/calendar" class="tile-link">
-        <div class="tile">
-          <p>📅</p>
-          <h2>Kalendarz</h2>
-          <p>Przeglądaj kalendarz i umawiaj wizyty</p>
-        </div>
-      </a>
+  <div class="tiles">
+    <a routerLink="/calendar" class="tile-link" *ngIf="role === 'Doctor' || role === 'Patient'">
+      <div class="tile">
+        <p>📅</p>
+        <h2>Kalendarz</h2>
+        <p>Przeglądaj kalendarz i umawiaj wizyty</p>
+      </div>
+    </a>
 
-      <!-- Kafelek 3 -->
-      <a routerLink="/users" class="tile-link">
-        <div class="tile">
-          <p>👨‍⚕️</p>
-          <h2>Lista pacjentów</h2>
-          <p>Zarządzaj swoimi pacjentami</p>
-        </div>
-      </a>
+    <a routerLink="/users" class="tile-link" *ngIf="role === 'Doctor'">
+      <div class="tile">
+        <p>👨‍⚕️</p>
+        <h2>Lista pacjentów</h2>
+        <p>Zarządzaj swoimi pacjentami</p>
+      </div>
+    </a>
 
-      <!-- Kafelek 4 -->
-      <a routerLink="/medicines" class="tile-link">
-        <div class="tile">
-          <p>📋</p>
-          <h2>Lista leków</h2>
-          <p>Dodawaj leki i sprawdzaj datę ważności</p>
-        </div>
-      </a>
+    <a routerLink="/medicines" class="tile-link" *ngIf="role === 'Doctor'">
+      <div class="tile">
+        <p>📋</p>
+        <h2>Lista leków</h2>
+        <p>Dodawaj leki i sprawdzaj datę ważności</p>
+      </div>
+    </a>
 
-      <a routerLink="/chat" class="tile-link">
-        <div class="tile">
-          <p>💬</p>
-          <h2>Chat</h2>
-          <p>Rozmawiaj ze współpracownikami</p>
-        </div>
-      </a>
-    </div>
-  </main>
+    <a routerLink="/chat" class="tile-link">
+      <div class="tile">
+        <p>💬</p>
+        <h2>Chat</h2>
+        <p>Rozmawiaj ze współpracownikami</p>
+      </div>
+    </a>
+  </div>
+</main>

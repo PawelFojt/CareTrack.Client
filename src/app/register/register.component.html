@@ -1,0 +1,11 @@
+﻿<div class="register-container">
+  <h2>Rejestracja</h2>
+  <div class="form-group">
+    <input [(ngModel)]="username" placeholder="Nazwa użytkownika" class="input-field">
+  </div>
+  <div class="form-group">
+    <input [(ngModel)]="password" placeholder="Hasło" type="password" class="input-field">
+  </div>
+  <button (click)="register()" class="register-button">Zarejestruj</button>
+  <a routerLink="/" class="back-link">← Powrót do strony głównej</a>
+</div>

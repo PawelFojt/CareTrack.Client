@@ -1,6 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../services/chat.service';
-import {RouterLink} from "@angular/router";
+import { AuthService } from '../services/auth.service';
+import { RouterLink } from "@angular/router";
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -16,9 +17,17 @@ export class ChatComponent implements OnInit {
   message = '';
   messages: { user: string; text: string }[] = [];
 
-  constructor(private chatService: ChatService) {}
+  constructor(
+    private chatService: ChatService,
+    private auth: AuthService
+  ) {}
 
   ngOnInit(): void {
+    const loggedInUser = this.auth.getLoggedInUser();
+    if (loggedInUser) {
+      this.user = loggedInUser;
+    }
+
     this.chatService.startConnection().then(() => {
       this.chatService.onMessageReceived((user, message) => {
         this.messages.push({ user, text: message });
