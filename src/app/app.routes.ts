@@ -12,6 +12,7 @@ import {ChatComponent} from "./chat/chat.component";
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 import {RoleGuard} from "./auth.guard";
+import {KnowledgeComponent} from "./knowledge/knowledge.component";
 
 
 export const routes: Routes = [
@@ -47,6 +48,9 @@ export const routes: Routes = [
     },
     {
         path: 'register', component: RegisterComponent
-    }
+    },
+    {
+      path: 'knowledge', component: KnowledgeComponent
+    },
 
 ];

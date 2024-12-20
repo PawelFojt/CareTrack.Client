@@ -1,0 +1,54 @@
+﻿<div class="knowledge-container">
+  <h2>Baza Wiedzy</h2>
+
+  <div class="knowledge-list">
+    <div *ngFor="let item of knowledgeItems" class="knowledge-item">
+
+      <div *ngIf="editMode && editItemId === item.id">
+        <h3>Edycja: {{item.title}}</h3>
+        <input [(ngModel)]="editTitle" placeholder="Tytuł" class="input-field" required>
+        <input [(ngModel)]="editDescription" placeholder="Opis" class="input-field" required>
+        <select [(ngModel)]="editType" class="input-field">
+          <option [value]="0">Artykuł</option>
+          <option [value]="1">Wideo</option>
+          <option [value]="2">Infografika</option>
+        </select>
+        <input [(ngModel)]="editUrl" placeholder="URL (opcjonalnie)" class="input-field">
+        <button (click)="saveEdit()" class="add-button">Zapisz</button>
+        <button (click)="cancelEdit()" class="add-button" style="background:#ccc;">Anuluj</button>
+      </div>
+
+      <div *ngIf="!(editMode && editItemId === item.id)">
+        <h3>{{item.title}}</h3>
+        <p>{{item.description}}</p>
+        <p><strong>Typ:</strong>
+          <span *ngIf="item.type === 0">Artykuł</span>
+          <span *ngIf="item.type === 1">Wideo</span>
+          <span *ngIf="item.type === 2">Infografika</span>
+        </p>
+        <p><strong>Autor:</strong> {{item.author}}</p>
+        <a *ngIf="item.url" [href]="item.url" target="_blank">Zobacz</a>
+
+        <div class="item-buttons">
+          <button *ngIf="username === item.author" (click)="startEdit(item)" class="edit-button">Edytuj</button>
+          <button *ngIf="username === item.author" (click)="deleteItem(item.id, item.author)" class="delete-button">Usuń</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 *ngIf="username">Dodaj nowy zasób</h3>
+  <div class="add-form" *ngIf="username">
+    <input [(ngModel)]="newTitle" placeholder="Tytuł" class="input-field" required>
+    <input [(ngModel)]="newDescription" placeholder="Opis" class="input-field" required>
+    <select [(ngModel)]="newType" class="input-field">
+      <option [value]="0">Artykuł</option>
+      <option [value]="1">Wideo</option>
+      <option [value]="2">Infografika</option>
+    </select>
+    <input [(ngModel)]="newUrl" placeholder="URL (opcjonalnie)" class="input-field">
+    <button (click)="addNewItem()" class="add-button">Dodaj</button>
+  </div>
+
+  <a routerLink="/" class="back-link">← Powrót do strony głównej</a>
+</div>

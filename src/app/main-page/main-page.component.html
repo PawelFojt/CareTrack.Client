@@ -26,6 +26,22 @@
   </div>
 
   <div class="tiles">
+    <a routerLink="/knowledge" class="tile-link">
+      <div class="tile">
+        <p>📚</p>
+        <h2>Baza Wiedzy</h2>
+        <p>Dostęp do artykułów, filmów i infografik</p>
+      </div>
+    </a>
+
+    <a routerLink="/chat" class="tile-link">
+      <div class="tile">
+        <p>💬</p>
+        <h2>Live Chat</h2>
+        <p>Rozmawiaj ze współpracownikami</p>
+      </div>
+    </a>
+
     <a routerLink="/calendar" class="tile-link" *ngIf="role === 'Doctor' || role === 'Patient'">
       <div class="tile">
         <p>📅</p>
@@ -47,14 +63,6 @@
         <p>📋</p>
         <h2>Lista leków</h2>
         <p>Dodawaj leki i sprawdzaj datę ważności</p>
-      </div>
-    </a>
-
-    <a routerLink="/chat" class="tile-link">
-      <div class="tile">
-        <p>💬</p>
-        <h2>Chat</h2>
-        <p>Rozmawiaj ze współpracownikami</p>
       </div>
     </a>
   </div>
