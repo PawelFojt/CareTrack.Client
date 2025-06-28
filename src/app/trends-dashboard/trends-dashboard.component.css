@@ -1,0 +1,44 @@
+.trends-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.trends-nav {
+  margin-bottom: 20px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+.trends-nav a {
+  margin-right: 20px;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #666;
+  border-radius: 4px;
+}
+.trends-nav a.active {
+  background-color: #007bff;
+  color: white;
+}
+.trends-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header-with-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.back-button {
+  color: #666;
+}
+
+h2 {
+  margin: 0;
+}
+
+

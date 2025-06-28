@@ -1,0 +1,16 @@
+<div class="trends-container">
+  <div class="header-with-nav">
+    <button mat-icon-button routerLink="/" class="back-button">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2>Analiza trendów zdrowotnych</h2>
+  </div>
+  <nav class="trends-nav">
+    <a routerLink="chart" routerLinkActive="active">Wykresy</a>
+    <a routerLink="summary" routerLinkActive="active">Podsumowanie</a>
+    <a routerLink="add" routerLinkActive="active">Dodaj pomiar</a>
+  </nav>
+  <div class="trends-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

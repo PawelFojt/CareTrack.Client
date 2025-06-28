@@ -1,0 +1,51 @@
+<mat-card class="chart-container">
+  <mat-card-header>
+    <mat-card-title>Trendy zdrowotne</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="controls">
+      <mat-form-field appearance="fill">
+        <mat-label>Wybierz pacjenta</mat-label>
+        <mat-select [(ngModel)]="selectedPatientId" (selectionChange)="loadTrends()">
+          <mat-option [value]="null">Wybierz pacjenta</mat-option>
+          @for (patient of patients; track patient.id) {
+            <mat-option [value]="patient.id">
+              {{ patient.lastName }} {{ patient.firstName }} ({{ patient.age }} lat)
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <div class="chart-type-selector">
+        <mat-button-toggle-group [value]="selectedMetric">
+          <mat-button-toggle value="weight" (click)="switchChartType('weight')">
+            Waga
+          </mat-button-toggle>
+          <mat-button-toggle value="bloodPressure" (click)="switchChartType('bloodPressure')">
+            Ciśnienie krwi
+          </mat-button-toggle>
+          <mat-button-toggle value="heartRate" (click)="switchChartType('heartRate')">
+            Tętno
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+
+    @if (!patients.length) {
+      <div class="no-data-message mat-elevation-z1">
+        Brak dostępnych pacjentów
+      </div>
+    }
+
+    @if (selectedPatientId && !trends.length) {
+      <div class="no-data-message mat-elevation-z1">
+        Brak pomiarów dla wybranego pacjenta
+      </div>
+    }
+
+    <div class="chart-wrapper">
+      <canvas #chartCanvas></canvas>
+    </div>
+  </mat-card-content>
+</mat-card>

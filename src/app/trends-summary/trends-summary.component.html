@@ -1,0 +1,103 @@
+<mat-card class="summary-container">
+  <mat-card-header>
+    <mat-card-title>Podsumowanie zdrowia</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="controls">
+      <mat-form-field appearance="fill">
+        <mat-label>Wybierz pacjenta</mat-label>
+        <mat-select [(ngModel)]="selectedPatientId" (selectionChange)="loadAnalysis()">
+          <mat-option [value]="null">Wybierz pacjenta</mat-option>
+          @for (patient of patients; track patient.id) {
+            <mat-option [value]="patient.id">
+              {{ patient.lastName }} {{ patient.firstName }} ({{ patient.age }} lat)
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Okres</mat-label>
+        <mat-select [(ngModel)]="selectedPeriod" (selectionChange)="loadAnalysis()">
+          <mat-option value="week">Ostatni tydzień</mat-option>
+          <mat-option value="month">Ostatni miesiąc</mat-option>
+          <mat-option value="year">Ostatni rok</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    @if (!patients.length) {
+      <div class="no-data-message mat-elevation-z1">
+        <mat-icon>warning</mat-icon>
+        Brak dostępnych pacjentów
+      </div>
+    }
+
+    @if (selectedPatientId && analysis) {
+      <div class="metric-grid">
+        <mat-card class="metric-card weight">
+          <mat-card-header>
+            <mat-card-title>Waga</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="value">{{analysis.averageWeight | number:'1.1-1'}} kg</div>
+            <div class="change" [class.positive]="analysis.weightChange > 0"
+                 [class.negative]="analysis.weightChange < 0">
+              <mat-icon>{{analysis.weightChange > 0 ? 'trending_up' : 'trending_down'}}</mat-icon>
+              {{abs(analysis.weightChange) | number:'1.1-1'}} kg
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        @if (analysis.averageBMI) {
+          <mat-card class="metric-card bmi">
+            <mat-card-header>
+              <mat-card-title>BMI</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="value">{{analysis.averageBMI | number:'1.1-1'}}</div>
+              <div class="category">{{getBMICategory(analysis.averageBMI)}}</div>
+            </mat-card-content>
+          </mat-card>
+        }
+
+        @if (analysis.averageBloodPressure) {
+          <mat-card class="metric-card blood-pressure">
+            <mat-card-header>
+              <mat-card-title>Ciśnienie krwi</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="value">
+                {{analysis.averageBloodPressure.systolic | number:'1.2-2'}}/{{analysis.averageBloodPressure.diastolic | number:'1.2-2'}} mmHg
+              </div>
+              <div class="category">
+                {{getBloodPressureCategory(analysis.averageBloodPressure)}}
+              </div>
+            </mat-card-content>
+          </mat-card>
+        }
+
+        @if (analysis.averageHeartRate) {
+          <mat-card class="metric-card heart-rate">
+            <mat-card-header>
+              <mat-card-title>Tętno</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="value">{{analysis.averageHeartRate | number:'1.2-2'}} uderzeń/min</div>
+              <div class="category">
+                {{getHeartRateCategory(analysis.averageHeartRate)}}
+              </div>
+            </mat-card-content>
+          </mat-card>
+        }
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="period-info">
+        <p>Dane za okres: {{getPeriodLabel()}}</p>
+      </div>
+    }
+  </mat-card-content>
+</mat-card>

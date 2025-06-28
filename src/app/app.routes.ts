@@ -13,6 +13,10 @@ import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 import {RoleGuard} from "./auth.guard";
 import {KnowledgeComponent} from "./knowledge/knowledge.component";
+import {TrendsDashboardComponent} from "./trends-dashboard/trends-dashboard.component";
+import {TrendsChartComponent} from "./trends-chart/trends-chart.component";
+import {TrendsSummaryComponent} from "./trends-summary/trends-summary.component";
+import {TrendsAddMeasurementComponent} from "./trends-add-measurement/trends-add-measurement.component";
 
 
 export const routes: Routes = [
@@ -52,5 +56,16 @@ export const routes: Routes = [
     {
       path: 'knowledge', component: KnowledgeComponent
     },
+  {
+    path: 'trends',
+    component: TrendsDashboardComponent,
+    children: [
+      { path: 'chart', component: TrendsChartComponent },
+      { path: 'summary', component: TrendsSummaryComponent },
+      { path: 'add', component: TrendsAddMeasurementComponent },
+      { path: '', redirectTo: 'chart', pathMatch: 'full' }
+    ]
+  }
+
 
 ];

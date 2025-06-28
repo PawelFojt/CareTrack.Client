@@ -1,0 +1,73 @@
+<div class="measurement-form-container">
+  <h2>Dodaj nowy pomiar</h2>
+
+  <form [formGroup]="measurementForm" (ngSubmit)="onSubmit()" class="measurement-form">
+    <mat-form-field appearance="fill">
+      <mat-label>Wybierz pacjenta</mat-label>
+      <mat-select formControlName="patientId">
+        <mat-option [value]="null">Wybierz pacjenta</mat-option>
+        @for (patient of patients; track patient.id) {
+          <mat-option [value]="patient.id">
+            {{ patient.lastName }} {{ patient.firstName }} ({{ patient.age }} lat)
+          </mat-option>
+        }
+      </mat-select>
+      <mat-error>{{ getErrorMessage('patientId') }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Data pomiaru</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="measurementDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error>{{ getErrorMessage('measurementDate') }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Waga (kg)</mat-label>
+      <input matInput type="number" formControlName="weight">
+      <mat-error>{{ getErrorMessage('weight') }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>BMI</mat-label>
+      <input matInput type="number" formControlName="bmi">
+      <mat-error>{{ getErrorMessage('bmi') }}</mat-error>
+    </mat-form-field>
+
+    <div class="blood-pressure-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Ciśnienie skurczowe</mat-label>
+        <input matInput type="number" formControlName="bloodPressureSystolic">
+        <mat-error>{{ getErrorMessage('bloodPressureSystolic') }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Ciśnienie rozkurczowe</mat-label>
+        <input matInput type="number" formControlName="bloodPressureDiastolic">
+        <mat-error>{{ getErrorMessage('bloodPressureDiastolic') }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Tętno (uderzenia/min)</mat-label>
+      <input matInput type="number" formControlName="heartRate">
+      <mat-error>{{ getErrorMessage('heartRate') }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Notatki</mat-label>
+      <textarea matInput formControlName="notes" rows="3"></textarea>
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button mat-button type="button" (click)="resetForm()" [disabled]="isSubmitting">
+        Wyczyść
+      </button>
+      <button mat-raised-button color="primary" type="submit"
+              [disabled]="!measurementForm.valid || isSubmitting">
+        Dodaj pomiar
+      </button>
+    </div>
+  </form>
+</div>

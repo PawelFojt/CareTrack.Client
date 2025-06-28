@@ -1,0 +1,47 @@
+.measurement-form-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.measurement-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.blood-pressure-group {
+  display: flex;
+  gap: 16px;
+}
+
+.blood-pressure-group mat-form-field {
+  flex: 1;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+:host ::ng-deep .success-snackbar {
+  background: #4caf50;
+  color: white;
+}
+
+:host ::ng-deep .error-snackbar {
+  background: #f44336;
+  color: white;
+}

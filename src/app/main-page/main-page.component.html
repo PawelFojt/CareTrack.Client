@@ -65,5 +65,13 @@
         <p>Dodawaj leki i sprawdzaj datę ważności</p>
       </div>
     </a>
+
+    <a routerLink="/trends" class="tile-link" *ngIf="role === 'Doctor'">
+      <div class="tile">
+        <p>📋</p>
+        <h2>Analiza trendów zdrowotnych</h2>
+        <p>Wykresy wraz z podsumowaniem</p>
+      </div>
+    </a>
   </div>
 </main>
