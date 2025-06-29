@@ -18,6 +18,7 @@ import {TrendsChartComponent} from "./trends-chart/trends-chart.component";
 import {TrendsSummaryComponent} from "./trends-summary/trends-summary.component";
 import {TrendsAddMeasurementComponent} from "./trends-add-measurement/trends-add-measurement.component";
 
+import { CeleRozwojoweComponent } from './cele-rozwojowe/cele-rozwojowe.component';
 
 export const routes: Routes = [
     {
@@ -55,6 +56,11 @@ export const routes: Routes = [
     },
     {
       path: 'knowledge', component: KnowledgeComponent
+    },
+
+    {
+    path: 'cele-rozwojowe',
+    component: CeleRozwojoweComponent
     },
   {
     path: 'trends',
